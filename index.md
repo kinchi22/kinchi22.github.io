@@ -1,3 +1,9 @@
+---
+#
+# Use the widgets beneath and the content will be
+# inserted automagically in the webpage. To make
+# this work, you have to use › layout: frontpage
+#
 layout: frontpage
 title: "Starting blog"
 header:
@@ -17,3 +23,4 @@ widget-3:
     url: 'http://kinchi22.github.io/'
     text: 'testing the front page haha'
     image: widget-1-302x182.jpg
+---
