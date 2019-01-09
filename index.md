@@ -7,18 +7,19 @@
 layout: frontpage
 title: "Starting blog"
 header:
+    title: Sool.K's Blog
     image_fullwidth: "header_unsplash_12.jpg"
-widget-1:
+widget1:
     title: "Title 1"
     url: 'http://kinchi22.github.io/'
     text: 'ABCD'
     image: widget-1-302x182.jpg
-widget-2:
+widget2:
     title: "Title 2"
     url: 'http://kinchi22.github.io/'
     text: 'testing the front page'
     image: widget-1-302x182.jpg
-widget-3:
+widget3:
     title: "Title 3"
     url: 'http://kinchi22.github.io/'
     text: 'testing the front page haha'

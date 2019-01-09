@@ -8,7 +8,7 @@
 #                                                 /____/
 #
 # Title of your website
-title: 'Suki-nchi'
+title: 'Sool-K Blog'
 
 # The slogan describes your website and is used on homepage in <title> and other important places
 slogan: 'Blogging'
@@ -38,7 +38,7 @@ improve_content: https://github.com/Phlow/feeling-responsive/edit/gh-pages
 # Example: <img src="{{ site.urlimg }}{{ post.image.title }}" />
 # Markdown-Example for posts ![Image Text]({{ site.urlimg }}image.jpg)
 #
-urlimg: 'https://kinchi22.github.io/feeling-responsive/images/'
+urlimg: 'https://kinchi22.github.io/images/'
 
 
 # Logo size is 600x80 pixels
