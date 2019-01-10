@@ -11,11 +11,12 @@ tags:
   - 범우
   - 독후감
 header:
-    image_fullwidth: hobby/the_school_of_athens.jpeg
-    caption: The School of Athens by Raphael
-    caption_url: https://en.wikipedia.org/wiki/The_School_of_Athens
+    image-fullwidth: hobby/the_school_of_athens.jpeg
 image:
     thumb: hobby/the_school_of_athens.jpeg
+    homepage: hobby/the_school_of_athens.jpeg
+    caption: The School of Athens by Raphael
+    caption_url: https://en.wikipedia.org/wiki/The_School_of_Athens
 ---
 <div class="medium-4 columns t30">
 <img src="{{ site.urlimg }}hobby/protagoras.jpg" alt="">
