@@ -47,3 +47,8 @@
 #   url: https://www.xing.com/profile/
 #   class: icon-xing
 #   title: Xing Profil
+
+- name: LinkedIn
+  url: https://www.linkedin.com/in/seulki-bae-63860811a/
+  class: icon-linkedin
+  title: "LinkedIn"
