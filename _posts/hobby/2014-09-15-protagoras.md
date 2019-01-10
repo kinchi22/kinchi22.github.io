@@ -11,7 +11,7 @@ tags:
   - 범우
   - 독후감
 header:
-    image-fullwidth: hobby/the_school_of_athens.jpeg
+    image_fullwidth: hobby/the_school_of_athens.jpeg
 image:
     thumb: hobby/the_school_of_athens.jpeg
     homepage: hobby/the_school_of_athens.jpeg
