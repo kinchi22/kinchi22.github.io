@@ -1,5 +1,5 @@
 ---
-layout: page-fullwidth
+layout: page
 subheadline: "Books"
 title: "프로타고라스 - 플라톤/범우"
 teaser: "프로타고라스는 플라톤 '대화편'의 하나로, 소크라테스와 프로타고라스의 논쟁이 서술되어 있다. 지,덕,선에 대해 펼친 논쟁을 기록한 책이며 주요 논점으로 덕이란 무엇이며 어떻게 구성되어 있는가, 덕은 지식을 통해 획득될 수 있는가 등이 거론되어 있다."
@@ -10,7 +10,10 @@ tags:
   - 플라톤
   - 범우
   - 독후감
-header: no
+header:
+    image_fullwidth: hobby/the_school_of_athens.jpeg
+    caption: The School of Athens by Raphael
+    caption_url: https://en.wikipedia.org/wiki/The_School_of_Athens
 image:
     title: hobby/the_school_of_athens.jpeg
     thumb: hobby/the_school_of_athens.jpeg
