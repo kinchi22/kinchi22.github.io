@@ -1,8 +1,8 @@
 ---
-layout: page
+layout: page-fullwidth
 subheadline: "Books"
 title: "프로타고라스 - 플라톤/범우"
-teaser: "두 사람이 함께 길을 가노라면 적어도 한 사람은 길을 잘 분별할 수 있다."
+teaser: "프로타고라스는 플라톤 '대화편'의 하나로, 소크라테스와 프로타고라스의 논쟁이 서술되어 있다. 지,덕,선에 대해 펼친 논쟁을 기록한 책이며 주요 논점으로 덕이란 무엇이며 어떻게 구성되어 있는가, 덕은 지식을 통해 획득될 수 있는가 등이 거론되어 있다."
 categories:
   - hobby
 tags:
@@ -12,11 +12,15 @@ tags:
   - 독후감
 header: no
 image:
-    title: hobby/protagoras.jpg
-    thumb: hobby/protagoras.jpg
-    caption: 프로타고라스 - 플라톤 / 범우
+    title: hobby/the_school_of_athens.jpeg
+    thumb: hobby/the_school_of_athens.jpeg
+    caption: The School of Athens by Raphael
 ---
 요즘 뉴​스에서 군대에 관한 이야기를 많이 접한다. 자잘하지만 지속적으로 발생하는 병영생활 행동강령 위반사례들부터 오랫동안 큰 이슈였던 총기사건이나 폭행으로 인한 사망사건까지, 나도 군대를 다녀왔기 때문인지 군에 관한 소식들은 다른 사건들보다 더욱 내 마음 한구석을 답답하게 했다. 도대체 왜 이런 사건들이 발생하는 것일까라는 표면적 의구심에서 인간의 도덕성과 정의, 양심 따위의 것들까지 곰곰히 생각하던 중에 프로타고라스가 눈에 들어왔다.
+
+<div class="medium-4 columns t30">
+<img src="{{ site.urlimg }}hobby/protagoras.jpg" alt="">
+</div><!-- /.medium-4.columns -->
 
 프로타고라스는 플라톤 '대화편'의 하나로, 소크라테스와 프로타고라스의 논쟁이 서술되어 있다. 지,덕,선에 대해 펼친 논쟁을 기록한 책이며 주요 논점으로 덕이란 무엇이며 어떻게 구성되어 있는가, 덕은 지식을 통해 획득될 수 있는가 등이 거론되어 있다.
 
