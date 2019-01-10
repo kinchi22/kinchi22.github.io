@@ -22,7 +22,14 @@
   - title: "Movies"
     url: "/hobby/movie/"
   - title: "Hobby Archive"
-    url: "/hobby/archive/"
+    url: "/ho/archive/"
+
+- title: Blog
+  url: "/blog/"
+  side: left
+  dropdown:
+  - title: "Blog Archive"
+    url: "/blog/archive/"
 
 - title: "Search"
   url: "/search/"
