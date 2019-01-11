@@ -7,8 +7,8 @@
 layout: frontpage
 title: "Starting blog"
 header:
-    title: Sool.K's Blog
-    image_fullwidth: "header_unsplash_12.jpg"
+    title: Sool.K Blog
+    image_fullwidth: "header_front.jpg"
 # widget1:
 #     title: "Title 1"
 #     url: 'http://kinchi22.github.io/'
