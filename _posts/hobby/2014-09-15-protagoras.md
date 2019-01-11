@@ -13,7 +13,7 @@ tags:
 header:
     image_fullwidth: hobby/the_school_of_athens.jpeg
 image:
-    thumb: hobby/the_school_of_athens.jpeg
+    thumb: hobby/the_school_of_athens-thumb.jpg
     homepage: hobby/the_school_of_athens.jpeg
     caption: The School of Athens by Raphael
     caption_url: https://en.wikipedia.org/wiki/The_School_of_Athens
