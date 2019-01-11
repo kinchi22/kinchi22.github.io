@@ -1,6 +1,6 @@
 ---
 layout: page
-subheadline: "books"
+subheadline: "movies"
 title: "The November Man"
 teaser: "은퇴한 특수요원이 주인공인 영화는 정말 많다. 온갖 클리셰가 난무하는 영화 속에서 그럴싸하게 폼을 잡아봐도 그게 진짜 멋으로 와닿을 수는 없다."
 categories:
