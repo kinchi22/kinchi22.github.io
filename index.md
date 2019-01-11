@@ -5,9 +5,8 @@
 # this work, you have to use › layout: frontpage
 #
 layout: frontpage
-title: "Starting blog"
+title: "Sool.K Blog"
 header:
-    title: Sool.K Blog
     image_fullwidth: "header_front.jpg"
 # widget1:
 #     title: "Title 1"
