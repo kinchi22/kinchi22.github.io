@@ -18,7 +18,7 @@ image:
     caption: Photo by Steven Kamenar
     caption_url: https://unsplash.com/photos/MMJx78V7xS8
 ---
-<div class="medium-4 columns t30">
+<div class="small-6 small-centered columns t30">
 <img src="{{ site.urlimg }}hobby/norwegian-wood.jpg" alt="">
 </div>
 
