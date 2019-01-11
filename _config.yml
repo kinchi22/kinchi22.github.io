@@ -8,20 +8,20 @@
 #                                                 /____/
 #
 # Title of your website
-title: 'Sool-K Blog'
+title: 'Sool.K Blog'
 
 # The slogan describes your website and is used on homepage in <title> and other important places
 slogan: 'Blogging'
 
 # The description is used on homepage and in the footer to quickly describe your website. Use a maximum of 150 characters for SEO-purposes.
-description: 'This blog has started from 2019/1/9'
+description: '지극히 개인적인 글정리를 목적으로 한 블로그입니다. 다만 어느 시점, 어떤 곳의 누군가에게는 도움이 될 수 있기를 바랍니다. 미래의 나를 포함해서.'
 
 # The credits show up in the includes/_footer.html – It would be nice of you to leave a link to Phlow or Feeling Responsive as a thank you :)
 credits: '<p>Created with &hearts; by <a href="http://phlow.de/">Phlow</a> with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> based on <a href="http://phlow.github.io/feeling-responsive/">Feeling Responsive</a>.</p>'
 
 # Main author of the website
 # See > authors.yml
-author: Suki
+author: Seulki Bae
 
 # This URL is the main address for absolute links. Don't include a slash at the end.
 #
