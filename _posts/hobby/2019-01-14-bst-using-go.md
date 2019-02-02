@@ -117,6 +117,7 @@ func insert(n *Node, new *Node) {
 {% endhighlight %}
 
 ## Deletion
+Binary Search Tree에서의 삭제는 다른 동작들보다 복잡하다.
 
 ## Traversal
 
