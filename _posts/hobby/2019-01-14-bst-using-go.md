@@ -73,10 +73,10 @@ func search(n *Node, k int) *Node {
 		return n
 	}
 	if k < n.key {
-		return search(k, n.left)
+		return search(n.left, k)
 	}
 	// k > n.key
-	return search(k, n.right)
+	return search(n.right, k)
 }
 {% endhighlight %}
 
@@ -100,7 +100,7 @@ key를 비교하며 새로운 노드가 추가될 위치를 찾는 재귀함수 
 {% highlight go %}
 // insert inserts the new node recursively
 func insert(n *Node, new *Node) {
-	if newNode.key < n.key {
+	if new.key < n.key {
 		if n.left == nil {
 			n.left = new
 		} else {
