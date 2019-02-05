@@ -117,7 +117,72 @@ func insert(n *Node, new *Node) {
 {% endhighlight %}
 
 ## Deletion
-Binary Search Tree에서의 삭제는 다른 동작들보다 복잡하다.
+Binary Search Tree에서 노드의 삭제는 다른 동작들보다 복잡하다. 노드를 삭제한 뒤에도 전체 Binary Search Tree는 Binary Search Tree로써의 기능을 유지해야 한다. 따라서 어떤 노드가 삭제되는가에 따라 Binary Search Tree 형태를 유지하기 위한 추가 처리가 필요할 수 있다. 이해를 쉽게 하기 위해서, 우선 어떤 경우가 있는지 살펴보자.
+1. 자식 노드를 가지지 않는 leaf 노드를 삭제하는 경우
+2. 하나의 자식 노드만 가지는 노드를 삭제하는 경우
+3. 좌/우 자식을 모두 가지는 노드를 삭제하는 경우
+
+먼저, Binary Search Tree에 대한 함수 `Delete(k int)`와 실제 삭제 처리를 담당할 내부 재귀함수 `delete(n *Node, k int)`의 기본은 다음과 같다.
+{% highlight go %}
+func (bst *Bst) Delete(k int) {
+	delete(bst.root, k)
+}
+
+func delete(n *Node, k int) *Node {
+	// if current node is not the target node
+	if n == nil {
+		return nil
+	} else if k < n.key {
+		n.left = remove(n.left, k)
+		return n
+	} else if k > n.key {
+		n.right = remove(n.right, k)
+		return n
+	}
+
+	// if current node is the target node
+	...
+}
+{% endhighlight %}
+
+재귀함수 `delete(n *Node, k int)`에서 현재 노드가 삭제할 노드일 경우에 대한 구현은 아래에서 살펴본다.
+
+#### 1. leaf 노드의 제거
+leaf 노드의 제거는 간단하다.
+{% highlight go %}
+func delete(n *Node, k int) *Node {
+	...
+	if n.left == nil & n.right == nil {
+		n = nil
+		return nil
+	}
+}
+{% endhighlight %}
+
+#### 2. 자식을 하나만 가지는 노드의 제거
+위에서 leaf 노드의 경우를 먼저 처리했기 때문에, 하나의 자식 노드가 존재하지 않는 것만 체크하는 것으로 자식을 하나만 가지는 노드를 가릴 수 있다.
+{% highlight go %}
+func delete(n *Node, k int) *Node {
+	...
+	// if the node has right child only
+	if n.left == nil {
+		n = n.right
+		return n
+	}
+	// if the node has left child only
+	if n.right == nil {
+		n = n.left
+		return n
+	}
+}
+{% endhighlight %}
+
+#### 3. 좌/우 자식을 모두 가지는 노드의 제거
+{% highlight go %}
+func delete(n *Node, k int) *Node {
+	...
+}
+{% endhighlight %}
 
 ## Traversal
 
