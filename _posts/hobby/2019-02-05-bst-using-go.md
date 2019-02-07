@@ -26,7 +26,10 @@ image:
 Binary search tree는 각 노드에 값이 있으며 그 값이 특정한 순서로 정렬이 가능할 때, 그 순서에 따라 정렬이 되어 있는 Binary tree를 의미한다. 이 글에서 Binary tree에 대한 정의는 [위키피디아 링크][1]로 대체한다.  
 노드의 순서는 대체로 대상 노드의 왼쪽 자식 트리는 대상 노드의 값보다 작은 값들을 가지며, 오른쪽 자식 트리는 대상 노드의 값보다 큰 값들을 가진다.
 
-기초적인 자료 구조를 얘기할 때 빠지지 않고 등장하는 Binary search tree는 정렬 및 검색을 효율적으로 할 수 있도록 도와줄 뿐 아니라, 기초적인 자료 구조답게 구현이 쉽다. 뿐만 아니라 소프트웨어 엔지니어의 면접 질문에도 자주 등장하곤 한다.
+기초적인 자료 구조를 얘기할 때 빠지지 않고 등장하는 Binary search tree는 정렬 및 검색을 효율적으로 할 수 있도록 도와줄 뿐 아니라, 기초적인 자료 구조답게 구현이 쉽다.
+
+#### Time complexity
+Binary search tree 의 노드 검색은 기본 O(logN)의 시간 복잡도를 가지며, 최악의 시나리오(모든 노드가 한쪽 자식 노드로 치우쳐 있는 경우)에서 O(N)의 시간 복잡도를 가진다.
 
 ## Operations
 위키피디아를 기준으로, Binary search tree의 기본적인 기능은 다음과 같다.
@@ -61,13 +64,13 @@ type Bst struct {
 원하는 key를 입력했을 때 해당 키를 갖는 노드를 반환하는 함수를 구현한다.
 만약 해당 key를 갖는 노드를 찾을 수 없는 경우 `nil`을 반환하도록 하였다.
 {% highlight go %}
-// Search searchs the key value
+// Search searches the targe node using key from the tree
 func (bst *Bst) Search(key int) *Node {
 	return search(bst.root, key)
 }
 
-// search searchs the key recursively
-// return nil if there is no node found
+// search is the internal recursive function to find the node by key
+// it returns nil if no node was found
 func search(n *Node, k int) *Node {
 	if n == nil || n.key == k {
 		return n
@@ -98,7 +101,8 @@ func (bst *Bst) Insert(key int, value Item) {
 만약 트리에 이미 root 노드가 존재하면, 새로운 노드를 추가할 올바른 위치를 찾아야한다.
 key를 비교하며 새로운 노드가 추가될 위치를 찾는 재귀함수 `insert(n *Node, new *Node)`를 구현한다.
 {% highlight go %}
-// insert inserts the new node recursively
+// insert is the internal recursive function to insert new node
+// by finding proper position recursively
 func insert(n *Node, new *Node) {
 	if new.key < n.key {
 		if n.left == nil {
@@ -147,7 +151,7 @@ func delete(n *Node, k int) *Node {
 
 재귀함수 `delete(n *Node, k int)`에서 현재 노드가 삭제할 노드일 경우에 대한 구현은 아래에서 살펴본다.
 
-#### 1. leaf 노드의 제거
+#### 1. leaf 노드의 삭제
 leaf 노드의 제거는 간단하다.
 {% highlight go %}
 func delete(n *Node, k int) *Node {
@@ -159,8 +163,9 @@ func delete(n *Node, k int) *Node {
 }
 {% endhighlight %}
 
-#### 2. 자식을 하나만 가지는 노드의 제거
-위에서 leaf 노드의 경우를 먼저 처리했기 때문에, 하나의 자식 노드가 존재하지 않는 것만 체크하는 것으로 자식을 하나만 가지는 노드를 가릴 수 있다.
+#### 2. 자식을 하나만 가지는 노드의 삭제
+위에서 leaf 노드의 경우를 먼저 처리했기 때문에, 하나의 자식 노드가 존재하지 않는 것만 체크하는 것으로 자식을 하나만 가지는 노드를 가릴 수 있다.  
+대상 노드를 삭제한 뒤에는 대상 노드가 있던 자리를 대상 노드의 자식 노드로 대체하는 것으로 삭제 처리가 완료될 수 있다.
 {% highlight go %}
 func delete(n *Node, k int) *Node {
 	...
@@ -177,10 +182,52 @@ func delete(n *Node, k int) *Node {
 }
 {% endhighlight %}
 
-#### 3. 좌/우 자식을 모두 가지는 노드의 제거
+#### 3. 좌/우 자식을 모두 가지는 노드의 삭제
+좌/우 자식을 모두 가지는 노드가 삭제된 뒤에는 대상 노드의 자리를 대체할 노드로 어떤 노드를 선택해야할 지 고민할 필요가 있다.
+다시 Binary Search Tree의 특성을 떠올려보자.
+- 좌측 자식들은 해당 노드보다 작은 키 값을 가진다.
+- 우측 자식들은 해당 노드보다 큰 키 값을 가진다.
+
+그렇다면 삭제된 노드를 대체할 수 있는 자식 노드는 다음과 같다.
+- 좌측 자식들 중 가장 큰 키 값을 가지는 노드
+- 우측 자식들 중 가장 작은 키 값을 가지는 노드
+
+위의 둘 중 어떤 노드로 대체를 하던 상관없겠지만, 번외로써 트리 내의 최대값과 최소값을 찾는 함수를 구현해보자.
+{% highlight go %}
+// max finds most right child
+func max(n *Node) *Node {
+	max := n
+	for {
+		if max != nil && max.right != nil {
+			max = max.right
+		} else {
+			break
+		}
+	}
+	return max
+}
+
+// min finds most left child
+func min(n *Node) *Node {
+	min := n
+	for {
+		if min != nil && min.left != nil {
+			min = min.left
+		} else {
+			break
+		}
+	}
+	return min
+}
+{% endhighlight %}
+본 구현에서는 우측 자식들 중 가장 작은 키 값을 가지는 노드로 삭제된 노드를 대체하도록 구현하였다.  
+현재 노드를 대체한 뒤에는 우측 자식 트리 내에서 대체된 노드를 삭제해야 한다.
 {% highlight go %}
 func delete(n *Node, k int) *Node {
-	...
+	n = max(n.right)
+	delete(n.right, n.key)
+
+	return n
 }
 {% endhighlight %}
 
