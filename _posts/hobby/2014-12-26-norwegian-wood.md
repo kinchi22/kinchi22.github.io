@@ -1,26 +1,23 @@
 ---
-layout: page
-subheadline: "books"
+layout: post
 title: "노르웨이의 숲 - 무라카미 하루키/민음사"
-teaser: "내가 하루키의 소설을 읽는 것은 이 노르웨이의 숲이 1Q84시리즈 이후 처음이다. 하루키의 소설엔 섹스가 너무 많다. 그의 소설을 많이 읽은 것은 아니지만 무라카미 하루키라는 작가와 함께 떠올리는 그의 색깔에는 '색(色)'이 빠지지 않는다."
+author: sk
 categories:
-  - hobby
+  - book
 tags:
   - 독후감
   - 노르웨이의 숲
   - 무라카미 하루키
   - 민음사
-header:
-    image_fullwidth: hobby/forest.jpg
-image:
-    thumb: hobby/forest-thumb.jpg
-    homepage: hobby/forest.jpg
-    caption: Photo by Steven Kamenar
-    caption_url: https://unsplash.com/photos/MMJx78V7xS8
+image: assets/images/hobby/forest.jpg
+    # caption: Photo by Steven Kamenar
+    # caption_url: https://unsplash.com/photos/MMJx78V7xS8
 ---
-<div class="small-6 small-centered columns t30">
-<img src="{{ site.urlimg }}hobby/norwegian-wood.jpg" alt="">
-</div>
+내가 하루키의 소설을 읽는 것은 이 노르웨이의 숲이 1Q84시리즈 이후 처음이다. 하루키의 소설엔 섹스가 너무 많다. 그의 소설을 많이 읽은 것은 아니지만 무라카미 하루키라는 작가와 함께 떠올리는 그의 색깔에는 '색(色)'이 빠지지 않는다.
+
+{:refdef: style="text-align: center;"}
+![protagoras]({{ site.baseurl }}/assets/images/hobby/norwegian-wood.jpg){:width="250px"}
+{: refdef}
 
 > 결국 글이라는 불완전한 그릇에 담을 수 있는 것은 불완전한 기억이나 불완전한 생각뿐이다.
 <cite>22 page</cite>

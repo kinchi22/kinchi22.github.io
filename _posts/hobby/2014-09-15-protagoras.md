@@ -1,30 +1,27 @@
 ---
-layout: page
-subheadline: "books"
+layout: post
 title: "프로타고라스 - 플라톤/범우"
-teaser: "요즘 뉴​스에서 군대에 관한 이야기를 많이 접한다. 자잘하지만 지속적으로 발생하는 병영생활 행동강령 위반사례들부터 오랫동안 큰 이슈였던 총기사건이나 폭행으로 인한 사망사건까지, 나도 군대를 다녀왔기 때문인지 군에 관한 소식들은 다른 사건들보다 더욱 내 마음 한구석을 답답하게 했다. 도대체 왜 이런 사건들이 발생하는 것일까라는 표면적 의구심에서 인간의 도덕성과 정의, 양심 따위의 것들까지 곰곰히 생각하던 중에 프로타고라스가 눈에 들어왔다."
+author: sk
 categories:
-  - hobby
+  - book
 tags:
   - 프로타고라스
   - 플라톤
   - 범우
   - 독후감
-header:
-    image_fullwidth: hobby/the_school_of_athens.jpeg
-image:
-    thumb: hobby/the_school_of_athens-thumb.jpg
-    homepage: hobby/the_school_of_athens.jpeg
-    caption: The School of Athens by Raphael
-    caption_url: https://en.wikipedia.org/wiki/The_School_of_Athens
+image: assets/images/hobby/the_school_of_athens.jpeg
+    # caption: The School of Athens by Raphael
+    # caption_url: https://en.wikipedia.org/wiki/The_School_of_Athens
 ---
-<div class="medium-4 columns t30">
-<img src="{{ site.urlimg }}hobby/protagoras.jpg" alt="">
-</div>
+요즘 뉴​스에서 군대에 관한 이야기를 많이 접한다. 자잘하지만 지속적으로 발생하는 병영생활 행동강령 위반사례들부터 오랫동안 큰 이슈였던 총기사건이나 폭행으로 인한 사망사건까지, 나도 군대를 다녀왔기 때문인지 군에 관한 소식들은 다른 사건들보다 더욱 내 마음 한구석을 답답하게 했다. 도대체 왜 이런 사건들이 발생하는 것일까라는 표면적 의구심에서 인간의 도덕성과 정의, 양심 따위의 것들까지 곰곰히 생각하던 중에 프로타고라스가 눈에 들어왔다.
 
 프로타고라스는 플라톤 '대화편'의 하나로, 소크라테스와 프로타고라스의 논쟁이 서술되어 있다. 지,덕,선에 대해 펼친 논쟁을 기록한 책이며 주요 논점으로 덕이란 무엇이며 어떻게 구성되어 있는가, 덕은 지식을 통해 획득될 수 있는가 등이 거론되어 있다.
 
 전문기술과는 다르게 인간은 본래 모든 사람이 정의와 덕성을 나누어 가지고 있다고 프로타고라스는 얘기했다. 모두가 나누어 가지고 있음에도 왜 우리 사회에는 정의에 반하는 일들이 발생하는 것일까. 덕이라는 것이 얼굴 생김새나 키처럼 타고나는 것이라면 덕성에 거슬리는 행동을 쉽게 책망하기는 어려울 것이다. 하지만 우리는 위와 같은 행동들에 거부감을 느끼고, 징계를 원하기도 한다. 이는 우리가 덕성이라는 것이 마음가짐과 배움으로 얻어질 수 있는 것이라고 생각하기 때문이다. 옳지 못한 행동에 대한 징계의 목적은 미래에 있다고 한다. 이 말을 듣고 나는 부끄러움을 느꼈다. 죄를 지었으면 그에 합당한 벌을 받아야 한다고 생각해왔다. 징계에 대한 의미를 그동안 모르면서도 생각조차 해보지 않은 것이다. 징계를 함으로써 미래에 이와 같은 행동을 하지 않도록 하고, 당사자 뿐 아니라 관찰하는 사람에게도 덕이 무엇인지 느끼고 배울 수 있도록 하는 것임을 이제야 알게 됐다.
+
+{:refdef: style="text-align: center;"}
+![protagoras]({{ site.baseurl }}/assets/images/hobby/protagoras.jpg){:width="350px"}
+{: refdef}
 
 덕은 지혜와 분별과 용기와 정의와 경건 같은 것으로 구성되어 있다. 이 중에서 지혜는 다른 것의 지배를 받지 않으며, 지혜와 지식이 가장 우월한 위치에서 사람을 지배할 수 있다고 말한다. 소크라테스는 사물에 대한 두려움 등은 그에 대한 무지 때문이라고 주장했다. 또한 우리가 선과 악 양자의 선택에서 오류를 범하는 것은 그 선택에 대한 무지에서 비롯한다는 것이다. 즉, 우리는 지식이 없으면 덕의 구성요소 중 많은 것을 얻을 수 없기 때문에 끊임없이 배워야 한다.
 

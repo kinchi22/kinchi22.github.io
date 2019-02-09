@@ -1,0 +1,25 @@
+---
+# Lets add a comment to make this file sass-y.
+# Change this file for any custom CSS.
+---
+// Import partials from `sass_dir` (defaults to `_sass`)
+
+@import
+	"syntax"
+;
+
+.post-tags {
+    color: #746c01;
+    text-align: right;
+}
+.pr10 { padding-right: 10px; }
+
+.social-icons {
+  a {
+	padding-right: 10px;
+  }
+}
+
+#logo {
+  padding: 25px;
+}

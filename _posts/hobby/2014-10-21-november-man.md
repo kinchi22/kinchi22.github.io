@@ -1,22 +1,18 @@
 ---
-layout: page
-subheadline: "movies"
+layout: post
 title: "The November Man"
-teaser: "은퇴한 특수요원이 주인공인 영화는 정말 많다. 온갖 클리셰가 난무하는 영화 속에서 그럴싸하게 폼을 잡아봐도 그게 진짜 멋으로 와닿을 수는 없다."
+author: sk
+teaser: 은퇴한 특수요원이 주인공인 영화는 정말 많다. 온갖 클리셰가 난무하는 영화 속에서 그럴싸하게 폼을 잡아봐도 그게 진짜 멋으로 와닿을 수는 없다.
 categories:
-  - hobby
+  - movie
 tags:
   - 영화
   - 노벰버 맨
   - 피어스 브로스넌
   - 2014년
-header:
-    image_fullwidth: hobby/novemberman.jpg
-image:
-    thumb: hobby/novemberman-thumb.jpg
-    homepage: hobby/novemberman.jpg
-    caption: "Director: Roger Donaldson"
-    caption_url: https://www.imdb.com/title/tt2402157/
+image: assets/images/hobby/novemberman.jpg
+    # caption: "Director: Roger Donaldson"
+    # caption_url: https://www.imdb.com/title/tt2402157/
 ---
 
 은퇴한 특수요원이 주인공인 영화는 정말 많다. 이런 주인공을 가진 영화를 하나하나 나열할 생각을 하면 너무 많아 어디부터 시작해야할지 머리부터 지끈거린다. 흔한 액션 영화의 주인공에 더불어 특정 사건을 기점으로 하는 은퇴와, 영화 중반부에서 은퇴를 결정짓게 한 과거의 사건을 떠올리는 장면 역시 익숙하다. 다른 영화에서 쉽게 볼 수 있는 흔한 플롯을 더 나열해 볼까? 아버지나 영웅처럼 따르던 파트너와 후에 대립각을 세우며 미묘한 감정의 혼란을 겪고, 사랑은 약점이 되며 복수는 더 이상 한 명만의 문제가 아니다.
