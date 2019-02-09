@@ -9,7 +9,7 @@ categories:
 tags:
   - Data structure
   - Binary search tree
-  - Golang
+  - Go
 image: assets/images/programming/tree.jpg
     # caption: Photo by niko photos
     # caption_url: https://unsplash.com/photos/tGTVxeOr_Rs
