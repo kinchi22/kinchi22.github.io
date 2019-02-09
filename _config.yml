@@ -2,7 +2,7 @@
 name: Sool.K Blog
 description: 지극히 개인적인 글정리를 목적으로 한 블로그입니다. 다만 어느 시점, 어떤 곳의 누군가에게는 도움이 될 수 있기를 바랍니다. 미래의 나를 포함해서.
 meta_description: "Jekyll theme for blogging."
-logo: 'assets/images/logo.jpg'
+logo: 'assets/images/logo.png'
 favicon: 'assets/images/favicon.jpg'
 paginate: 12
 baseurl:
