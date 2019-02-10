@@ -11,8 +11,8 @@ tags:
   - Binary search tree
   - Go
 image: assets/images/programming/tree.jpg
-    # caption: Photo by niko photos
-    # caption_url: https://unsplash.com/photos/tGTVxeOr_Rs
+caption: Photo by niko photos
+caption_url: https://unsplash.com/photos/tGTVxeOr_Rs
 ---
 ## Definition
 Binary search tree는 각 노드에 값이 있으며 그 값이 특정한 순서로 정렬이 가능할 때, 그 순서에 따라 정렬이 되어 있는 Binary tree를 의미한다. 이 글에서 Binary tree에 대한 정의는 [위키피디아 링크][1]로 대체한다.  

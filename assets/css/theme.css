@@ -36,13 +36,13 @@ pre {
 .mediumnavigation {
 	background: #fff;
         transition: top 0.5s ease-in-out;
-        padding: 1.5rem 1rem;
+        padding: 1rem 1rem;
         box-shadow: 0px 10px 40px 0px rgba( 0, 0, 0, 0.05 );
 }
 .nav-up {box-shadow:none;}
 
 .site-content {
-    padding-top: 3.5rem;
+    padding-top: 3rem;
     margin-top: 57px;
     transition: all 0.4s;
 }
@@ -428,7 +428,6 @@ blockquote {
 }
 .featured-image {
     display: block;
-    margin-bottom: 2rem;
     box-shadow: 0 6px 10px 0 rgba(0,0,0,0.1);
 }
 /* .article-post img, .article-post iframe {

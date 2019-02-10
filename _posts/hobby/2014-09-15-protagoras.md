@@ -10,8 +10,8 @@ tags:
   - 범우
   - 독후감
 image: assets/images/hobby/the_school_of_athens.jpeg
-    # caption: The School of Athens by Raphael
-    # caption_url: https://en.wikipedia.org/wiki/The_School_of_Athens
+caption: The School of Athens by Raphael
+caption_url: https://en.wikipedia.org/wiki/The_School_of_Athens
 ---
 요즘 뉴​스에서 군대에 관한 이야기를 많이 접한다. 자잘하지만 지속적으로 발생하는 병영생활 행동강령 위반사례들부터 오랫동안 큰 이슈였던 총기사건이나 폭행으로 인한 사망사건까지, 나도 군대를 다녀왔기 때문인지 군에 관한 소식들은 다른 사건들보다 더욱 내 마음 한구석을 답답하게 했다. 도대체 왜 이런 사건들이 발생하는 것일까라는 표면적 의구심에서 인간의 도덕성과 정의, 양심 따위의 것들까지 곰곰히 생각하던 중에 프로타고라스가 눈에 들어왔다.
 
