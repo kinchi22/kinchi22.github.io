@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Hackerrank:New Year Chaos 문제풀이"
+title: "HackerRank 문제풀이: New Year Chaos"
 author: sk
 teaser: 요즘 해커랭크에서 알고리즘 문제를 파이썬으로 푸는 재미에 푹 빠졌다. 파이썬의 간결함과 강력한 표준 라이브러리, 높은 생산성에 감탄하며 간단한 알고리즘 문제들을 척척 처리하던 중, 처음으로 timeout 실패를 맛보게 해준 문제가 있었다. 그래서 그 문제의 해결 과정을 기록에 남기려 한다.
 categories:
@@ -8,7 +8,7 @@ categories:
 tags:
   - Algorithm
   - Python
-  - Hackerrank
+  - HackerRank
 image: assets/images/programming/money.jpg
 caption: Photo by A L L E F . V I N I C I U S Δ
 caption_url: https://unsplash.com/photos/fJTqyZMOh18

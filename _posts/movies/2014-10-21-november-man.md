@@ -6,11 +6,9 @@ teaser: 은퇴한 특수요원이 주인공인 영화는 정말 많다. 온갖 �
 categories:
   - movie
 tags:
-  - 영화
-  - 노벰버 맨
   - 피어스 브로스넌
-  - 2014년
-image: assets/images/hobby/novemberman.jpg
+  - 2014
+image: assets/images/movies/novemberman.jpg
 caption: "Director: Roger Donaldson"
 caption_url: https://www.imdb.com/title/tt2402157/
 ---

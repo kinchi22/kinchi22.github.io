@@ -6,8 +6,7 @@ teaser: 기본적인 자료 구조 중 하나인 Binary Search Tree(이진 탐�
 categories:
   - technology
 tags:
-  - Data structure
-  - Binary search tree
+  - Data Structure
   - Go
 image: assets/images/programming/tree.jpg
 caption: Photo by niko photos
