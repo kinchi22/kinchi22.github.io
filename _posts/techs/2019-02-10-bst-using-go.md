@@ -4,8 +4,7 @@ title: "Go로 구현하는 Binary Search Tree"
 author: sk
 teaser: 기본적인 자료 구조 중 하나인 Binary Search Tree(이진 탐색 트리)를 Go언어를 이용해 구현해본다.
 categories:
-  - data structure
-  - go
+  - technology
 tags:
   - Data structure
   - Binary search tree
