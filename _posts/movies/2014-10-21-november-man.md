@@ -7,7 +7,7 @@ categories:
   - movie
 tags:
   - 피어스 브로스넌
-  - 2014
+  - "2014"
 image: assets/images/movies/novemberman.jpg
 caption: "Director: Roger Donaldson"
 caption_url: https://www.imdb.com/title/tt2402157/
