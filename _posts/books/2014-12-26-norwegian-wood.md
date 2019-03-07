@@ -14,8 +14,8 @@ caption_url: https://unsplash.com/photos/MMJx78V7xS8
 내가 하루키의 소설을 읽는 것은 이 노르웨이의 숲이 1Q84시리즈 이후 처음이다. 하루키의 소설엔 섹스가 너무 많다. 그의 소설을 많이 읽은 것은 아니지만 무라카미 하루키라는 작가와 함께 떠올리는 그의 색깔에는 '색(色)'이 빠지지 않는다.
 
 {:refdef: style="text-align: center;"}
-![protagoras]({{ site.baseurl }}/assets/images/books/norwegian-wood.jpg){:width="250px"}
-{: refdef}
+![norwegian-wood]({{ site.baseurl }}/assets/images/books/norwegian-wood.jpg){:width="250px"}
+{:refdef}
 
 > 결국 글이라는 불완전한 그릇에 담을 수 있는 것은 불완전한 기억이나 불완전한 생각뿐이다.
 <cite>22 page</cite>

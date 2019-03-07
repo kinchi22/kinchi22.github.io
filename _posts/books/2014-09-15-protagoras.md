@@ -20,7 +20,7 @@ caption_url: https://en.wikipedia.org/wiki/The_School_of_Athens
 
 {:refdef: style="text-align: center;"}
 ![protagoras]({{ site.baseurl }}/assets/images/books/protagoras.jpg){:width="350px"}
-{: refdef}
+{:refdef}
 
 덕은 지혜와 분별과 용기와 정의와 경건 같은 것으로 구성되어 있다. 이 중에서 지혜는 다른 것의 지배를 받지 않으며, 지혜와 지식이 가장 우월한 위치에서 사람을 지배할 수 있다고 말한다. 소크라테스는 사물에 대한 두려움 등은 그에 대한 무지 때문이라고 주장했다. 또한 우리가 선과 악 양자의 선택에서 오류를 범하는 것은 그 선택에 대한 무지에서 비롯한다는 것이다. 즉, 우리는 지식이 없으면 덕의 구성요소 중 많은 것을 얻을 수 없기 때문에 끊임없이 배워야 한다.
 

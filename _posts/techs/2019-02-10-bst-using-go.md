@@ -17,8 +17,8 @@ Binary search tree(이하 BST)는 각 노드에 값이 있으며 그 값이 특�
 노드의 순서는 대체로 대상 노드의 왼쪽 자식 트리는 대상 노드의 값보다 작은 값들을 가지며, 오른쪽 자식 트리는 대상 노드의 값보다 큰 값들을 가진다.
 
 {:refdef: style="text-align: center;"}
-![protagoras]({{ site.baseurl }}/assets/images/programming/bst.png){:width="250px"}
-{: refdef}
+![bst]({{ site.baseurl }}/assets/images/programming/bst.png){:width="250px"}
+{:refdef}
 
 기초적인 자료 구조를 얘기할 때 빠지지 않고 등장하는 BST는 정렬 및 검색을 효율적으로 할 수 있도록 도와줄 뿐 아니라, 기초적인 자료 구조답게 구현이 쉽다.
 
