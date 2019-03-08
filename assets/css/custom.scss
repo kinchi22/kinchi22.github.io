@@ -8,8 +8,28 @@
 	"syntax"
 ;
 
+/* Gray scale
+-------------------------------------------------------------------------*/
+$grey-1: #E4E4E4;
+$grey-2: #D7D7D7;
+$grey-3: #CBCBCB;
+$grey-4: #BEBEBE;
+$grey-5: #A4A4A4;
+$grey-6: #979797;
+$grey-7: #8B8B8B;
+$grey-8: #7E7E7E;
+$grey-9: #646464;
+$grey-10: #575757;
+$grey-11: #4B4B4B;
+$grey-12: #3E3E3E;
+$grey-13: #313131;
+$grey-14: #242424;
+$grey-15: #171717;
+$grey-16: #0B0B0B;
+
+
 .post-tags {
-  color: #a1a1a1;
+  color: $grey-5;
   text-align: right;
 }
 .pr10 { padding-right: 10px; }
@@ -29,7 +49,7 @@
 
 .tag-list {
   display: inline-block;
-  background: #a1a1a1;
+  background: $grey-5;
   color: #ffffff;
   margin: .2em .3em;
   padding: 0 .5rem;
@@ -39,12 +59,12 @@
 
 .tag-posts {
   a {
-    color: #575757;
-    border-bottom: 1px dotted #BEBEBE;
+    color: $grey-10;
+    border-bottom: 1px dotted $grey-4;
     transition:all 0.2s;
   }
   a:hover {
-    box-shadow:inset 0 -30px 0 #BEBEBE, 0 0.5px 0 #BEBEBE;
+    box-shadow:inset 0 -30px 0 $grey-4, 0 0.5px 0 $grey-4;
     border-bottom: 0px;
     text-decoration:none;
     transition:all 0.2s;
@@ -63,13 +83,35 @@ figcaption,
   a {
     color:inherit;
     // box-shadow:inset 0 -2px 0 #BEBEBE, 0 0.5px 0 #BEBEBE;
-    border-bottom: 1px dotted #BEBEBE;
+    border-bottom: 1px dotted $grey-4;
     transition:all 0.2s;
   }
   a:hover {
-    box-shadow:inset 0 -30px 0 #BEBEBE, 0 0.5px 0 #BEBEBE;
+    box-shadow:inset 0 -30px 0 $grey-4, 0 0.5px 0 $grey-4;
     border-bottom: 0px;
     text-decoration:none;
     transition:all 0.2s;
+  }
+}
+
+
+.accordion {
+  .card {
+    margin-bottom: 0px;
+  }
+  .card-header {
+    padding: .25rem .25rem;
+  }
+  .card-body {
+    padding: .75rem 1.25rem 1.25rem;
+    a {
+      color: $grey-7;
+    }
+    font-size: .95rem;
+  }
+  .btn {
+    color: $grey-15;
+    box-shadow: none;
+    font-size: 16px;
   }
 }

@@ -2,5 +2,5 @@
 layout: archive
 title: "Movies"
 permalink: "/movie/"
-category: "movie"
+category: "Movie"
 ---

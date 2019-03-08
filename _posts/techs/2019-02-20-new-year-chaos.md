@@ -3,7 +3,7 @@ layout: post
 title: "HackerRank 문제풀이: New Year Chaos"
 author: sk
 categories:
-  - technology
+  - Technology
 tags:
   - Algorithm
   - Python

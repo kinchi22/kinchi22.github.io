@@ -3,7 +3,7 @@ layout: post
 title: "The November Man"
 author: sk
 categories:
-  - movie
+  - Movie
 tags:
   - 피어스 브로스넌
   - "2014"

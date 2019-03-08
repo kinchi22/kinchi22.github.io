@@ -3,7 +3,7 @@ layout: post
 title: "프로타고라스 - 플라톤/범우"
 author: sk
 categories:
-  - book
+  - Book
 tags:
   - 프로타고라스
   - 플라톤

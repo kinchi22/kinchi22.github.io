@@ -3,7 +3,7 @@ layout: post
 title: "Law Abiding Citizen (모범시민)"
 author: sk
 categories:
-  - movie
+  - Movie
 tags:
   - "2009"
   - 제라드 버틀러

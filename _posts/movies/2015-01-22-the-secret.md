@@ -3,7 +3,7 @@ layout: post
 title: "Si j'étais toi (The Secret)"
 author: sk
 categories:
-  - movie
+  - Movie
 tags:
   - "2007"
   - 프랑스

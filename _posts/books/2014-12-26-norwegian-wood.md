@@ -3,7 +3,7 @@ layout: post
 title: "노르웨이의 숲 - 무라카미 하루키/민음사"
 author: sk
 categories:
-  - book
+  - Book
 tags:
   - 무라카미 하루키
   - 민음사

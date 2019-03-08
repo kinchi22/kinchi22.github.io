@@ -4,7 +4,7 @@ title: "Kingsman: The Golden Circle"
 author: sk
 teaser: "성공한 액션 영화 킹스맨의 속편 '킹스맨: 골든 서클'. 전작을 의식하면서도 전작의 그림자에서 탈피하려는 시도가 엿보이지만, 끝없는 클리셰의 향연과 개연성 부족 등으로 영화의 즐거움은 많이 감소하였다."
 categories:
-  - movie
+  - Movie
 tags:
   - "2017"
   - 콜린 퍼스
