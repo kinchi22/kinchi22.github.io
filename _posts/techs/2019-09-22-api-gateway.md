@@ -12,7 +12,7 @@ caption: Photo by John Lockwood
 caption_url: https://unsplash.com/photos/FcLq69V7Rsc
 ---
 
-MSA(Microservice Architecture: 마이크로 서비스 아키텍쳐)를 도입하려 할 때 함께 고려해야 하는 것 중에 API 게이트웨이가 있다. API 게이트웨이는 잘게 쪼개져 분산되어 있는 각 서비스의 엔드포인트를 단일화하고, 인증과 인가를 비롯한 공통 기능 처리 등을 담당한다.
+MSA(Microservice Architecture: 마이크로 서비스 아키텍쳐)를 도입하려 할 때 함께 고려해야 하는 것 중에 API 게이트웨이가 있다. MSA에서 API 게이트웨이를 고려해야 하는 이유는 무엇이며, API 게이트웨이의 주요 기능으로는 무엇이 있을까?
 
 ## 공통 기능 처리
 유저에게 제공되는 서비스를 개발할 때, 어떤 서비스던 공통적으로 필요한 기능들이 있다. 대표적으로 인증 및 인가, 로깅과 같은 기능들이다. API 게이트웨이가 없다면 MSA에서 각 서비스 컴포넌트가 이러한 공통 기능들을 중복으로 가져야 하는 문제가 발생한다.  
@@ -42,12 +42,27 @@ API 게이트웨이를 지나 여러 개의 API 서버를 갖는 구성에서, A
 다양한 서비스 및 클라이언트를 지원하게 되면, 각 서비스 및 클라이언트가 다른 통신 프로토콜을 사용해야 하는 경우가 생길 수 있다.
 특히, 내부 API는 gRPC와 같은 차세대 프로토콜을 이용해 구현하면서도, 외부로는 REST API를 통해 서비스함으로써 내부 API의 성능을 올리면서도 범용성을 높이는 것이 가능하다.
 ### Aggregation
-Agregation이란 서로 다른 API를 묶어서 하나의 API로 제공하는 것을 의미한다.  
+Agregation이란 서로 다른 API를 묶어서 하나의 API로 제공하는 것을 의미한다. 예로, 치킨을 조리하고 포장하는 작업을 하나의 API로 제공하려 한다고 해보자.  
+1. 양계장에서 닭 배달
+2. 조리 방식 선정 (튀기기 대 굽기)
+3. 포장
+
+치킨의 조리부터 포장까지 마치기 위해서 위와 같은 3개의 서로 다른 서비스의 API를 호출해야 한다고 해보자. 이를 API 게이트웨이에서 aggregation 한다면 다음과 같은 형태로 구현할 수 있다.
+{:refdef: style="text-align: center;"}
+![common]({{ site.baseurl }}/assets/images/programming/api-gateway-aggregation.png)
+{:refdef}
+
 다만, 과도한 aggregation은 API 게이트웨이에 큰 부담을 줄 위험이 있다. 이와 같은 문제를 해결하기 위해서, 여러 API를 조합하는 목적의 mediation API 서버 계층을 도입할 수 있다.
+
+{:refdef: style="text-align: center;"}
+![common]({{ site.baseurl }}/assets/images/programming/api-gateway-mediation-server.png)
+{:refdef}
 
 ## References
 - [조대협의 블로그: 대용량 웹서비스를 위한 마이크로 서비스 아키텍쳐의 이해][1]
 - [조대협의 블로그: MSA 아키텍쳐 구현을 위한 API 게이트웨이의 이해 (API GATEWAY)][2]
+- [API 게이트웨이 패턴과 클라이언트-마이크로 서비스 간 직접 통신][3]
 
 [1]: https://bcho.tistory.com/948
 [2]: https://bcho.tistory.com/1005
+[3]: https://docs.microsoft.com/ko-kr/dotnet/architecture/microservices/architect-microservice-container-applications/direct-client-to-microservice-communication-versus-the-api-gateway-pattern
