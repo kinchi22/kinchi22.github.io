@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html  lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Vue w/ TypeScript: Component, Props - Sool.K Blog</title>
+
+
+    <meta name="description" content="지난 포스트에서는 Vue CLI를 이용해 Vue 프로젝트를 생성했다. 이제 본격적으로 Vue를 이용해 어플리케이션을 만들 차례이다.이번 포스트에서는 Vue의 핵심 개념 중 하나인 Component와 Props를 이해하며, TypeScript로 이를 이용하는 방법을 알아본다.">
+<meta name="keywords" content="Vue.js,Typescript,Tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue w&#x2F; TypeScript: Component, Props">
+<meta property="og:url" content="https:&#x2F;&#x2F;kinchi22.github.io&#x2F;2019&#x2F;03&#x2F;13&#x2F;vue-js-2&#x2F;index.html">
+<meta property="og:site_name" content="Sool.K Blog">
+<meta property="og:description" content="지난 포스트에서는 Vue CLI를 이용해 Vue 프로젝트를 생성했다. 이제 본격적으로 Vue를 이용해 어플리케이션을 만들 차례이다.이번 포스트에서는 Vue의 핵심 개념 중 하나인 Component와 Props를 이해하며, TypeScript로 이를 이용하는 방법을 알아본다.">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https:&#x2F;&#x2F;kinchi22.github.io&#x2F;2019&#x2F;03&#x2F;13&#x2F;vus-js-2&#x2F;vue-js-2.jpg">
+<meta property="og:updated_time" content="2020-03-28T02:00:51.467Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;kinchi22.github.io&#x2F;2019&#x2F;03&#x2F;13&#x2F;vus-js-2&#x2F;vue-js-2.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/assets/favicon.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/monokai-sublime.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72437521-5"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-72437521-5');
+</script>
+
+    
+    
+    
+    <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1067642,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/assets/favicon.png" alt="Vue w/ TypeScript: Component, Props" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/2019/03/13/vus-js-2/vue-js-2.jpg" alt="Vue w/ TypeScript: Component, Props">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-12T15:00:00.000Z">2019-03-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Frontend/">Frontend</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6분 읽기 (대략 941 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Vue w/ TypeScript: Component, Props
+            
+        </h1>
+        <div class="content">
+            <p>지난 포스트에서는 Vue CLI를 이용해 Vue 프로젝트를 생성했다. 이제 본격적으로 Vue를 이용해 어플리케이션을 만들 차례이다.<br>이번 포스트에서는 Vue의 핵심 개념 중 하나인 Component와 Props를 이해하며, TypeScript로 이를 이용하는 방법을 알아본다.</p>
+<a id="more"></a>
+
+<p>본 튜토리얼에서는 Vue의 모든 부분을 커버하려 노력하지 않을 것이다.<br>TypeScript와 클래스 스타일 컴포넌트를 사용하는 것에 주력할 것이며, 그 외 <a href="https://vuejs.org/v2/guide/" target="_blank" rel="noopener">공식 문서</a>에서 자세히 설명되고 있는 부분들은 생략될 수 있다.</p>
+<h1 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h1><p>프로젝트를 시작했을 때 자동으로 만들어진 웹 어플리케이션을 기반으로, 새로운 컴포넌트를 추가할 것이다.<br><code>views/About.vue</code>에 새로 만들 컴포넌트 <code>AboutMe</code>를 등록한다.</p>
+<p>새로 만들어질 컴포넌트의 경로를 <code>components/AboutMe.vue</code>라고 가정하고, 이를 import한다.<br>그리고 이 컴포넌트 <code>AboutMe</code>는 현재 클래스 About에 컴포넌트로써 선언된다.</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"ts"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-javascript"><span class="hljs-keyword">import</span> &#123; Component, Vue &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vue-property-decorator'</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-javascript"><span class="hljs-keyword">import</span> AboutMe <span class="hljs-keyword">from</span> <span class="hljs-string">'@/components/AboutMe.vue'</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  components: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    AboutMe,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">About</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Vue</span> </span>&#123;&#125;</span></span></pre></td></tr></table></figure>
+
+<p>컴포넌트 <code>AboutMe</code>에는 3개의 데이터 <code>name</code>, <code>age</code>, <code>phrase</code>를 내려보내려 한다.</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"about"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>This is an about page<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">AboutMe</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"Seulki Bae"</span> <span class="hljs-attr">age</span>=<span class="hljs-string">3</span> <span class="hljs-attr">phrase</span>=<span class="hljs-string">"I'm hungry"</span>/&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>다음은 컴포넌트 <code>components/AboutMe.vue</code>를 만들 차례이다.<br>부모 컴포넌트 <code>About</code>으로부터 건네받는 3개의 데이터를 프로퍼티로써 선언한다.</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> AboutMe <span class="hljs-keyword">extends</span> Vue &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-meta">@Prop</span>() <span class="hljs-keyword">private</span> name!: <span class="hljs-built_in">string</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-meta">@Prop</span>() <span class="hljs-keyword">private</span> age!: <span class="hljs-built_in">number</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-meta">@Prop</span>() <span class="hljs-keyword">private</span> phrase!: <span class="hljs-built_in">string</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>그리고 위 프로퍼티들을 이용해 적당히 Template을 만들어 확인해보자.</p>
+<center>
+  <img src="/2019/03/13/vue-js-2/vue-js-2-about.png" class>
+</center>
+건네받은 프로퍼티를 이용한 페이지가 잘 출력되고 있는 것을 확인할 수 있다.
+
+<h1 id="Prop"><a href="#Prop" class="headerlink" title="Prop"></a>Prop</h1><p>위의 예제까지는 프로젝트를 생성할 때 만들어진 데모 어플리케이션에서 보여주고 있는 것과 다른 점이 없다.<br>데이터를 자식 컴포넌트에게 프로퍼티로써 건네줄 때, 템플릿 안에서 각 데이터를 정적으로 할당하고 있는데, 당연하게도 우리는 어플리케이션을 만들 때 클래스에 속해있는 데이터를 건네주고 싶어진다.</p>
+<p>먼저 정적 데이터들을 클래스 내 데이터로 가져온다.</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> About <span class="hljs-keyword">extends</span> Vue &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">private</span> myName: <span class="hljs-built_in">string</span> = <span class="hljs-string">'Seulki Bae'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">private</span> myAge: <span class="hljs-built_in">number</span> = <span class="hljs-number">3</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">private</span> myPhrase: <span class="hljs-built_in">string</span> = <span class="hljs-string">'I\'m hungry'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>이제 템플릿에서 데이터들을 자식 컴포넌트 <code>AboutMe</code>에 바인드한다.<br>데이터는 디렉티브 <code>v-bind:</code>를 이용해 간단하게 바인드할 수 있다.</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">AboutMe</span> <span class="hljs-attr">v-bind:name</span>=<span class="hljs-string">"myName"</span> <span class="hljs-attr">v-bind:age</span>=<span class="hljs-string">"myAge"</span> <span class="hljs-attr">v-bind:phrase</span>=<span class="hljs-string">"myPhrase"</span>/&gt;</span></span></pre></td></tr></table></figure>
+<p><code>v-bind:name</code>은 <code>:name</code>로 줄여서 사용할 수 있다. 개인적으로는 코드가 장황해지는 것을 피하기 위해 디렉티브의 약기를 사용하는 것을 선호한다.<br>주의할 점은 둘을 섞어 사용하지 않도록 하는 것이 중요하다는 것이다. 이는 Vue.js의 스타일 가이드에서도 <a href="https://vuejs.org/v2/style-guide/#Directive-shorthands-strongly-recommended" target="_blank" rel="noopener">주의</a>하고 있다.</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">AboutMe</span> <span class="hljs-attr">:name</span>=<span class="hljs-string">"myName"</span> <span class="hljs-attr">:age</span>=<span class="hljs-string">"myAge"</span> <span class="hljs-attr">:phrase</span>=<span class="hljs-string">"myPhrase"</span>/&gt;</span></span></pre></td></tr></table></figure>
+<h2 id="Prop-vs-Data"><a href="#Prop-vs-Data" class="headerlink" title="Prop vs. Data"></a>Prop vs. Data</h2><p>Vue에 익숙하지 않다면, Prop(프로퍼티)와 데이터의 차이에 대해 궁금해질 것이다.<br>간단하게 말하자면, 프로퍼티는 부모 컴포넌트로부터 내려받은 데이터이며, 데이터는 해당 클래스가 소유하고 있는 데이터이다.<br>더 자세히 알고 싶다면, <a href="https://kinchi22.github.io/2019/03/23/vue-props-vs-data/">Props vs Data in Vue</a>를 참고하자.</p>
+<hr>
+<p><a href="https://github.com/kinchi22/vue-ts-class/tree/tutorial2-component-prop" target="_blank" rel="noopener">튜토리얼 소스 코드</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Tutorial/" rel="tag">Tutorial</a>, <a class="has-link-grey -link" href="/tags/Typescript/" rel="tag">Typescript</a>, <a class="has-link-grey -link" href="/tags/Vue-js/" rel="tag">Vue.js</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+<div class="sharethis-inline-share-buttons"></div>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ab6f60ace89f00013641890&amp;product=inline-share-buttons' async='async'></script>
+
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/03/23/vue-props-vs-data/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Props vs Data in Vue</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/03/07/vue-js/">
+                <span class="level-item">Vue w/ TypeScript: 프로젝트 시작하기</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://kinchi22.github.io/2019/03/13/vue-js-2/';
+        this.page.identifier = '2019/03/13/vue-js-2/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'sool-k-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Component">
+        <span class="has-mr-6">1</span>
+        <span>Component</span>
+        </a></li><li>
+        <a class="is-flex" href="#Prop">
+        <span class="has-mr-6">2</span>
+        <span>Prop</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Prop-vs-Data">
+        <span class="has-mr-6">2.1</span>
+        <span>Prop vs. Data</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Book/">
+            <span class="level-start">
+                <span class="level-item">Book</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Movie/">
+            <span class="level-start">
+                <span class="level-item">Movie</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Data-Structure/">
+            <span class="level-start">
+                <span class="level-item">Data Structure</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Frontend/">
+            <span class="level-start">
+                <span class="level-item">Frontend</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Microservice/">
+            <span class="level-start">
+                <span class="level-item">Microservice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/assets/favicon.png" alt="Vue w/ TypeScript: Component, Props" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Seulki Bae&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: false,
+            fold: ''
+        }
+    }
+};
+</script>
+
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;" target="_blank" rel="noopener">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
