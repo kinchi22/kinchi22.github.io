@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html  lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>restful-react를 활용한 OpenAPI Spec으로부터 React Hook을 생성하는 방법 소개 - Sool.K Blog</title>
+
+
+    <meta name="description" content="OpenAPI Spec과 Swagger 덕에 API Spec을 매우 편하게 공유하고 관리할 수 있게 되었다. 하지만 제아무리 API Spec이 보기 쉽게 공유된다 하더라도, 해당 API를 사용하는 애플리케이션을 개발하는 과정에서 발생할 수 있는 인간의 실수를 무시할 수 없을 뿐 아니라, 이 과정이 여간 귀찮은 게 아니다. 하지만 이런 귀찮은 일을 하기 싫어">
+<meta name="keywords" content="React,Next.js,OpenAPI,Stoplight Studio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="restful-react를 활용한 OpenAPI Spec으로부터 React Hook을 생성하는 방법 소개">
+<meta property="og:url" content="https:&#x2F;&#x2F;kinchi22.github.io&#x2F;2020&#x2F;03&#x2F;29&#x2F;generate-hook-using-openapi&#x2F;index.html">
+<meta property="og:site_name" content="Sool.K Blog">
+<meta property="og:description" content="OpenAPI Spec과 Swagger 덕에 API Spec을 매우 편하게 공유하고 관리할 수 있게 되었다. 하지만 제아무리 API Spec이 보기 쉽게 공유된다 하더라도, 해당 API를 사용하는 애플리케이션을 개발하는 과정에서 발생할 수 있는 인간의 실수를 무시할 수 없을 뿐 아니라, 이 과정이 여간 귀찮은 게 아니다. 하지만 이런 귀찮은 일을 하기 싫어">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https:&#x2F;&#x2F;kinchi22.github.io&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-03-29T02:00:12.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;kinchi22.github.io&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/assets/favicon.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/monokai-sublime.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134155584-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134155584-1');
+</script>
+
+    
+    
+    
+    <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1067642,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/assets/favicon.png" alt="restful-react를 활용한 OpenAPI Spec으로부터 React Hook을 생성하는 방법 소개" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-28T21:31:08.000Z">2020-03-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Frontend/">Frontend</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    16분 읽기 (대략 2420 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                restful-react를 활용한 OpenAPI Spec으로부터 React Hook을 생성하는 방법 소개
+            
+        </h1>
+        <div class="content">
+            <p>OpenAPI Spec과 Swagger 덕에 API Spec을 매우 편하게 공유하고 관리할 수 있게 되었다. 하지만 제아무리 API Spec이 보기 쉽게 공유된다 하더라도, 해당 API를 사용하는 애플리케이션을 개발하는 과정에서 발생할 수 있는 인간의 실수를 무시할 수 없을 뿐 아니라, 이 과정이 여간 귀찮은 게 아니다. 하지만 이런 귀찮은 일을 하기 싫어하는 게으른 개발자들은 세상을 꾸준히 평화롭게 만들어주고 있다.</p>
+<a id="more"></a>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>2000년, Roy Fielding에 의해 REST가 소개된 이후로 REST API는 현재까지도 웹 애플리케이션 개발에서 매우 중요한 축을 담당하고 있으며, 현재까지도 많은 웹 애플리케이션이 REST API를 사용 및 제공하고 있다. 많은 경우의 개발과정 및 유지보수에서 REST API를 설계 및 관리할 때, <a href="https://en.wikipedia.org/wiki/OpenAPI_Specification" target="_blank" rel="noopener">OpenAPI Specification</a>의 형태로 관리하며, <a href="https://swagger.io/" target="_blank" rel="noopener">Swagger</a>등의 툴을 이용해 시각화하여 개발자 간의 의사소통에 사용되곤 한다.</p>
+<center>
+  <img src="/2020/03/29/generate-hook-using-openapi/swagger.png" class>
+  <br>
+  <small>Swagger Demo</small>
+</center>
+
+<p>좋다. Swagger는 미려한 UI를 제공하며, API의 상세를 참으로 알기 편하게 해준다. 하지만 역시 이걸 보면서 API의 URI path를 쓰고, 파라미터의 이름과 타입, validation을 한땀 한땀 써내려가다보면, 내가 제대로 받아 적고 있기는 한건지 걱정될 뿐 아니라, 매우, 귀찮다.</p>
+<p>여기서 <a href="https://github.com/contiamo/restful-react" target="_blank" rel="noopener">restful-react</a>라는 빛을 발견하였고, 가볍게 사용해본 결과 내 삶은 약간 더 평화로워졌다. 따라서 나는 오늘 여기서 약간의 내면의 평화를 얻는 방법을 공유하려 한다. <a href="https://nextjs.org/" target="_blank" rel="noopener">Next.js</a>를 이용하여 TODO 애플리케이션을 만들면서, restful-react를 활용하여 OpenAPI Spec으로부터 React Hook을 생성하는 방법을 살펴볼 것이다. 그리고 약간의 덤으로, OpenAPI Spec을 매우 편리하게 쓸 수 있는 <a href="https://stoplight.io/studio/" target="_blank" rel="noopener">Stoplight Studio</a>도 소개하려 한다.</p>
+<h1 id="애플리케이션-설계"><a href="#애플리케이션-설계" class="headerlink" title="애플리케이션 설계"></a>애플리케이션 설계</h1><p>OpenAPI Spec을 써내려가기 앞서, 지금부터 만들고자 하는 애플리케이션의 요구사항부터 정리해야 한다. 오늘 우리의 목적은 애플리케이션을 멋지게 만드는 게 아니라, API 인터페이스를 한땀 한땀 수 놓는 귀찮음으로부터 해방되어 내면의 평화를 얻는 것이다. 요구사항은 간단하게 가자.</p>
+<ul>
+<li>TODO 리스트를 보여준다</li>
+<li>각 TODO는 날짜와 내용을 가지고 있다</li>
+<li>TODO 리스트에 새로운 TODO를 추가할 수 있다</li>
+</ul>
+<p>너무도 간단한 요구사항이라 벌써부터 내면의 평화가 찾아오려 한다. 하지만 진짜 평화는 따로 있으니까 아직은 때가 아니다.</p>
+<h2 id="Stoplight-Studio를-이용한-OpenAPI-Spec-배출"><a href="#Stoplight-Studio를-이용한-OpenAPI-Spec-배출" class="headerlink" title="Stoplight Studio를 이용한 OpenAPI Spec 배출"></a>Stoplight Studio를 이용한 OpenAPI Spec 배출</h2><p>이제 위 요구사항을 만족시킬 수 있는 REST API를 설계해야 한다. 여기서 Stoplight Studio를 사용할 것이다. Stoplight Studio의 소개를 간단하게 보자.</p>
+<blockquote>
+<p>Design APIs 10x faster with our free OpenAPI editor. Prototype and share your API within minutes.</p>
+</blockquote>
+<p>간단하게 말하면, <strong>공짜</strong>로 <strong>겁나 빠르게</strong> OpenAPI를 쓰고 공유할 수 있다는 얘기다. 심지어 이 멋진 OSS는 웹 버전도 있어 간단히 사용할 수 있다. <a href="https://stoplight.io/studio/" target="_blank" rel="noopener">Stoplight Studio</a> 페이지에 가면, 웹 버전으로 통하는 링크가 있을 것이다. 여기서 로컬 프로젝트를 하나 생성한다.</p>
+<center>
+  <img src="/2020/03/29/generate-hook-using-openapi/stoplight.png" class>
+  <br>
+  <small>Stoplight Studio에서 새 프로젝트 생성</small>
+</center>
+
+<p>새 프로젝트를 생성하고 들어서면, 너무나도 직관적인 메뉴들이 늘어서 있다. todo API를 추가해보자. 빈 껍데기 뿐인 API Overview를 볼 수 있다. 좌하단의 Paths에 우리가 필요한 API들의 경로를 추가할 수 있다.</p>
+<center>
+  <img src="/2020/03/29/generate-hook-using-openapi/stoplight-1.png" class>
+  <br>
+  <small>todo API와 todos 경로 추가</small>
+</center>
+
+<p>위 요구사항을 만족할 수 있으려면 몇 개의 API가 필요할까? 자세한 설명은 생략하고 결과부터 보자.</p>
+<ul>
+<li>GET /todos: TODO list를 몽땅 가져오는 API. 파라미터는 없다.</li>
+<li>POST /todos: TODO를 추가하는 API. Request body에 TODO의 내용을 JSON 포맷으로 넣어줄 것이다.</li>
+</ul>
+<p>그리고 이 API에 필요한 모델로는 Todo가 있겠다. Paths 밑에 있는 Models에 추가해준다. Stoplight Studio는 너무도 직관적이며, REST API와 OpenAPI Spec에 대한 기본적인 이해만 바탕에 있으면 사용에 무리가 없을 것이다. 따라서 이걸 소개하느라 너무 많은 시간을 쓸 수는 없다. 어디까지나 이건 덤이니까.</p>
+<p>Stoplight Studio를 통해 OpenAPI Spec을 완성하고 나면 우상단의 Code를 눌러 다음과 같은 OpenAPI Spec을 얻을 수 있다.</p>
+<figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">openapi:</span> <span class="hljs-number">3.0</span><span class="hljs-number">.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">info:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">title:</span> <span class="hljs-string">todo</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">version:</span> <span class="hljs-string">'1.0'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">description:</span> <span class="hljs-string">TODO</span> <span class="hljs-string">application</span> <span class="hljs-string">for</span> <span class="hljs-string">our</span> <span class="hljs-string">inner</span> <span class="hljs-string">peace...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">servers:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-bullet">-</span> <span class="hljs-attr">url:</span> <span class="hljs-string">'http://localhost:3000'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">paths:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-string">/todos:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-attr">get:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">summary:</span> <span class="hljs-string">Get</span> <span class="hljs-string">the</span> <span class="hljs-string">todo</span> <span class="hljs-string">list</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">tags:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-bullet">-</span> <span class="hljs-string">todo</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">responses:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-attr">'200':</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">          <span class="hljs-attr">description:</span> <span class="hljs-string">OK</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">          <span class="hljs-attr">content:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-attr">application/json:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">              <span class="hljs-attr">schema:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                <span class="hljs-string">$ref:</span> <span class="hljs-string">'#/components/schemas/Todos'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">operationId:</span> <span class="hljs-string">get-todos</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-attr">post:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">summary:</span> <span class="hljs-string">Create</span> <span class="hljs-string">a</span> <span class="hljs-string">new</span> <span class="hljs-string">todo</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">operationId:</span> <span class="hljs-string">post-todos</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">responses:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-attr">'200':</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">          <span class="hljs-attr">description:</span> <span class="hljs-string">OK</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">requestBody:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-attr">content:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">          <span class="hljs-attr">application/json:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-attr">schema:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">              <span class="hljs-string">$ref:</span> <span class="hljs-string">'#/components/schemas/Todo'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">tags:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-bullet">-</span> <span class="hljs-string">todo</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">components:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">schemas:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-attr">Todos:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">title:</span> <span class="hljs-string">Todos</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">type:</span> <span class="hljs-string">object</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">properties:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-attr">todos:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">          <span class="hljs-attr">type:</span> <span class="hljs-string">array</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">          <span class="hljs-attr">items:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">$ref:</span> <span class="hljs-string">'#/components/schemas/Todo'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">x-tags:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-bullet">-</span> <span class="hljs-string">todo</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">description:</span> <span class="hljs-string">''</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-attr">Todo:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">title:</span> <span class="hljs-string">Todo</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">type:</span> <span class="hljs-string">object</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">x-tags:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-bullet">-</span> <span class="hljs-string">todo</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">properties:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-attr">id:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">          <span class="hljs-attr">type:</span> <span class="hljs-string">integer</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-attr">due_date:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-attr">title:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">securitySchemes:</span> <span class="hljs-string">&#123;&#125;</span></span></pre></td></tr></table></figure>
+
+<h1 id="TODO-애플리케이션"><a href="#TODO-애플리케이션" class="headerlink" title="TODO 애플리케이션"></a>TODO 애플리케이션</h1><p>이제 위에서 설계한 API를 소비하는 클라이언트 애플리케이션을 만들 것이다. 사용할 프레임워크는 React의 확장인 Next.js다. React도 무관하다. npm을 이용해 간단하게 프로젝트를 시작할 수 있다.</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm init next-app</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ <span class="hljs-built_in">cd</span> todo-for-inner-peace</span></pre></td></tr></table></figure>
+
+<p>난 TypeScript를 좋아하니까, TypeScript도 설치한다.</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm i --save-dev typescript @types/react @types/node</span></pre></td></tr></table></figure>
+
+<h2 id="restful-react"><a href="#restful-react" class="headerlink" title="restful-react"></a>restful-react</h2><p>이제야 겨우 본론에 들어왔다. 위에서 생성한 OpenAPI Spec을 바탕으로, restful-react를 이용해 fetcher를 생성할 것이다.<br>그러려면 우선 restful-react를 설치해야 한다.</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm i --save restful-react</span></pre></td></tr></table></figure>
+<p>위에서 생성한 yaml 파일을 적당한 위치에 두고, fetcher를 생성해보자. 성공하면 다음과 같은 메시지를 볼 수 있다.</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npx restful-react import --file api/todo.v1.yaml --output api/fetchers.tsx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">🎉  Your OpenAPI spec has been converted into ready to use restful-react components!</span></pre></td></tr></table></figure>
+
+<h2 id="GET-todos"><a href="#GET-todos" class="headerlink" title="GET /todos"></a>GET /todos</h2><p>이제 <code>GET /todos</code> API를 호출하는 Hook을 restful-react가 생성해준 fetcher를 이용해 만들어볼 것이다. restful-react에 의해 생성된 <code>fetchers.tsx</code>를 살펴보면 <code>useGetTodos</code>를 찾을 수 있다. OpenAPI Spec에 기술한 <code>GET /todos</code>를 호출하여, response를 React Hook으로 만들어주는 역할을 한다.</p>
+<p><code>GET /todos</code> API에서 데이터를 받아 렌더링 해보자. 코드는 다음과 같은 모습이 될 것이다.</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// pages/index.tsx</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> Home: NextPage = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">const</span> &#123; data: getTodos &#125; = useGetTodos(&#123;&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">return</span> (</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      &#123;getTodos?.todos?.map(<span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> (</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &lt;p&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">          due_date: &#123;todo.due_date&#125;, title: &#123;todo.title&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &lt;<span class="hljs-regexp">/p&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">      ))&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">    &lt;/</span>div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="Mocking-the-API"><a href="#Mocking-the-API" class="headerlink" title="Mocking the API"></a>Mocking the API</h2><p>위에서 간단하게 짠 코드가 제대로 동작하는 지 확인하고 싶은데, 우리는 아직 API Spec만 있을 뿐, 실제 동작하는 API를 가지고 있지 않다. 그렇다고 API 서버를 세우자니, 너무도 귀찮다. 애초에 내가 이걸 시작한 이유가 뭐였는가, 귀찮아서였다. 초심을 잃지 말자.</p>
+<p>우리가 위에서 OpenAPI Spec을 생성하는 데에 사용했던 Stoplight Studio를 개발한 Stoplight사에서는 <a href="https://stoplight.io/open-source/prism/" target="_blank" rel="noopener">Prism</a>이라는 라이브러리도 개발하고 있다. Prism의 사용법은 꽤나 간단하지만, 커맨드라인에서 일일히 사용하는 것이 귀찮다면 Stoplight Studio App을 다운로드 하는 것을 추천한다. 애플리케이션은 Mac, Windows 그리고 Linux 버전까지 지원하고 있다.</p>
+<p>위에서는 웹 버전으로 OpenAPI Spec을 설계하였다. 동일한 인터페이스를 제공하는 애플리케이션을 다운로드 하여 실행하면, 자동으로 OpenAPI Spec으로 설계한 API들을 Mocking 해준다.</p>
+<center>
+  <img src="/2020/03/29/generate-hook-using-openapi/stoplight-mock.png" class>
+  <br>
+  <small>Stoplight Studio App이 제공하는 Mock Server</small>
+</center>
+
+<p>curl을 이용해 Mocking이 제대로 되고 있는지 확인해보자.</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ curl http://127.0.0.1:3100/todos</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#123;<span class="hljs-string">"todos"</span>:[&#123;<span class="hljs-string">"id"</span>:-88158399,<span class="hljs-string">"due_date"</span>:<span class="hljs-string">"enim cillum veni"</span>,<span class="hljs-string">"title"</span>:<span class="hljs-string">"ut nulla tempor dolore dolor"</span>&#125;,&#123;<span class="hljs-string">"id"</span>:79437924,<span class="hljs-string">"due_date"</span>:<span class="hljs-string">"consequat cupidatat sunt ut"</span>,<span class="hljs-string">"title"</span>:<span class="hljs-string">"in"</span>&#125;,&#123;<span class="hljs-string">"id"</span>:31130696,<span class="hljs-string">"due_date"</span>:<span class="hljs-string">"commodo anim sint"</span>,<span class="hljs-string">"title"</span>:<span class="hljs-string">"minim consectetur id"</span>&#125;]&#125;</span></pre></td></tr></table></figure>
+<p><code>id</code>나 <code>due_date</code>의 상태가 영 좋지 못하지만 타입은 맞춰주고 있으며, Spec에 Validation을 꼼꼼히 적지 않은 탓도 있으니 넘어가자. Mocking은 잘 되고 있다.</p>
+<h2 id="RestfulProvider"><a href="#RestfulProvider" class="headerlink" title="RestfulProvider"></a>RestfulProvider</h2><p>이제 restful-react의 <code>RestfulProvider</code> API를 이용해 우리 todos API의 base URL을 설정해주어야 한다.<br>App을 <code>RestfulProvider</code> API로 감싸주면 되는데, next.js라면 <code>pages/_app.tsx</code>파일을 생성하여 다음과 같이 설정할 수 있다.</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// pages/_app.tsx</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyApp</span>(<span class="hljs-params">&#123; Component, pageProps &#125;: AppProps</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">return</span> (</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    &lt;RestfulProvider</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      base=<span class="hljs-string">"http://127.0.0.1:3100"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      &lt;Component &#123;...pageProps&#125; /&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &lt;<span class="hljs-regexp">/RestfulProvider&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">  )</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">export default MyApp</span></span></pre></td></tr></table></figure>
+
+<p>이제 앱을 기동해 확인해보자.</p>
+<center>
+  <img src="/2020/03/29/generate-hook-using-openapi/application-wip.png" class width="270">
+  <br>
+  <small>Todo list를 Mock server로부터 가져와 표시</small>
+</center>
+
+<h2 id="POST-todos"><a href="#POST-todos" class="headerlink" title="POST /todos"></a>POST /todos</h2><p>Todo를 추가하기 위한 POST method API의 경우 Request body가 필요하다. 적절한 input들을 만들고, 버튼을 눌렀을 때 input들을 request body에 담아 API를 호출한다.</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> Home: NextPage = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">const</span> &#123; data: getTodos &#125; = useGetTodos(&#123;&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">const</span> &#123; mutate: postTodos &#125; = usePostTodos(&#123;&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">const</span> [ state, setState ] = React.useState(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    dueDate: <span class="hljs-string">''</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    title: <span class="hljs-string">''</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">const</span> handleChange: React.ChangeEventHandler&lt;HTMLInputElement&gt; = <span class="hljs-function">(<span class="hljs-params">e: React.ChangeEvent&lt;HTMLInputElement&gt;</span>) =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">const</span> &#123; name, value &#125; = e.target</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    setState(<span class="hljs-function"><span class="hljs-params">prevState</span> =&gt;</span> (&#123; ...prevState, [name]: value&#125;))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">const</span> handleClick: React.MouseEventHandler&lt;HTMLButtonElement&gt; = <span class="hljs-function">(<span class="hljs-params">e: React.MouseEvent&lt;HTMLButtonElement&gt;</span>) =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    postTodos(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">      due_date: state.dueDate,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">      title: state.title,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-keyword">return</span> (</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &lt;div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">      &lt;label&gt;TODO: &lt;<span class="hljs-regexp">/label&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">      &lt;input</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">        type="text"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">        name="title"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">        value=&#123;state.title&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">        onChange=&#123;handleChange&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">      /</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">      &lt;br /&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">      &lt;label&gt;due date: &lt;<span class="hljs-regexp">/label&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">      &lt;input</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">        type="text"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">        name="dueDate"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">        value=&#123;state.dueDate&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">        onChange=&#123;handleChange&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">      /</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">      &lt;br /&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">      &lt;button onClick=&#123;handleClick&#125;&gt;TODO등록&lt;<span class="hljs-regexp">/button&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">      &#123;getTodos?.todos?.map(todo =&gt; (</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">        &lt;p&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">          due_date: &#123;todo.due_date&#125;, title: &#123;todo.title&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">        &lt;/</span>p&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">      ))&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">    &lt;<span class="hljs-regexp">/div&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">  )</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-regexp">&#125;</span></span></pre></td></tr></table></figure>
+
+<center>
+  <img src="/2020/03/29/generate-hook-using-openapi/application-done.png" class width="270">
+  <br>
+  <small>완성된 애플리케이션의 모습</small>
+</center>
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Next-js/" rel="tag">Next.js</a>, <a class="has-link-grey -link" href="/tags/OpenAPI/" rel="tag">OpenAPI</a>, <a class="has-link-grey -link" href="/tags/React/" rel="tag">React</a>, <a class="has-link-grey -link" href="/tags/Stoplight-Studio/" rel="tag">Stoplight Studio</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+<div class="sharethis-inline-share-buttons"></div>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ab6f60ace89f00013641890&amp;product=inline-share-buttons' async='async'></script>
+
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/09/22/api-gateway/">
+                <span class="level-item">API Gateway의 주요 기능 이해</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://kinchi22.github.io/2020/03/29/generate-hook-using-openapi/';
+        this.page.identifier = '2020/03/29/generate-hook-using-openapi/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'sool-k-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#들어가며">
+        <span class="has-mr-6">1</span>
+        <span>들어가며</span>
+        </a></li><li>
+        <a class="is-flex" href="#애플리케이션-설계">
+        <span class="has-mr-6">2</span>
+        <span>애플리케이션 설계</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Stoplight-Studio를-이용한-OpenAPI-Spec-배출">
+        <span class="has-mr-6">2.1</span>
+        <span>Stoplight Studio를 이용한 OpenAPI Spec 배출</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#TODO-애플리케이션">
+        <span class="has-mr-6">3</span>
+        <span>TODO 애플리케이션</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#restful-react">
+        <span class="has-mr-6">3.1</span>
+        <span>restful-react</span>
+        </a></li><li>
+        <a class="is-flex" href="#GET-todos">
+        <span class="has-mr-6">3.2</span>
+        <span>GET /todos</span>
+        </a></li><li>
+        <a class="is-flex" href="#Mocking-the-API">
+        <span class="has-mr-6">3.3</span>
+        <span>Mocking the API</span>
+        </a></li><li>
+        <a class="is-flex" href="#RestfulProvider">
+        <span class="has-mr-6">3.4</span>
+        <span>RestfulProvider</span>
+        </a></li><li>
+        <a class="is-flex" href="#POST-todos">
+        <span class="has-mr-6">3.5</span>
+        <span>POST /todos</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Book/">
+            <span class="level-start">
+                <span class="level-item">Book</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Movie/">
+            <span class="level-start">
+                <span class="level-item">Movie</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Data-Structure/">
+            <span class="level-start">
+                <span class="level-item">Data Structure</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Frontend/">
+            <span class="level-start">
+                <span class="level-item">Frontend</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Microservice/">
+            <span class="level-start">
+                <span class="level-item">Microservice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/assets/favicon.png" alt="restful-react를 활용한 OpenAPI Spec으로부터 React Hook을 생성하는 방법 소개" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Seulki Bae&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: false,
+            fold: ''
+        }
+    }
+};
+</script>
+
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
